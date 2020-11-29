@@ -22,5 +22,10 @@
   "homepage": "https://github.com/strelov1/frontend-project-lvl2#readme",
   "dependencies": {
     "commander": "^6.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
   }
 }
