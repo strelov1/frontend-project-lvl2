@@ -1,0 +1,26 @@
+{
+  "name": "@hexlet/code",
+  "version": "0.0.1",
+  "description": "[![Actions Status](https://github.com/strelov1/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/strelov1/frontend-project-lvl2/actions)",
+  "main": "index.js",
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strelov1/frontend-project-lvl2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/strelov1/frontend-project-lvl2/issues"
+  },
+  "homepage": "https://github.com/strelov1/frontend-project-lvl2#readme",
+  "dependencies": {
+    "commander": "^6.2.0"
+  }
+}
