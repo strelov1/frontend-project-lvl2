@@ -7,6 +7,9 @@ link:
 test:
 	npm run test
 
+test-coverage:
+	npm test -- --coverage --coverageProvider=v8
+
 watch:
 	npm run test:watch
 

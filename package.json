@@ -8,14 +8,14 @@
   },
   "type": "module",
   "scripts": {
-    "test": "npx -n --experimental-vm-modules -n --no-warnings jest --colors",
-    "test:watch": "npx -n --experimental-vm-modules -n --no-warnings jest --colors --watch "
+    "test": "npx jest --colors",
+    "test:watch": "npx jest --colors --watch "
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/strelov1/frontend-project-lvl2.git"
   },
-  "author": "",
+  "author": "Ilya Strelov",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/strelov1/frontend-project-lvl2/issues"
