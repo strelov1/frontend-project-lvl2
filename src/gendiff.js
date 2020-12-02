@@ -10,15 +10,7 @@ import _ from 'lodash';
  * @returns { remain: {}, deleted: {}, added: {}, changed: [] }
  */
 function compareObject(obj1, obj2) {
-  const mergedObject = { ...obj1, ...obj2 };
-  const initDiffObj = {
-    remain: {},
-    deleted: {},
-    added: {},
-    changed: [],
-  };
-
-  return Object.entries(mergedObject).reduce((acc, curr) => {
+  return Object.entries({ ...obj1, ...obj2 }).reduce((acc, curr) => {
     const [key, value] = curr;
     if (!_.has(obj2, key)) {
       const deletedItem = { [key]: value };
@@ -37,7 +29,9 @@ function compareObject(obj1, obj2) {
       return { ...acc, changed: { ...acc.changed, ...changedItem } };
     }
     return acc;
-  }, initDiffObj);
+  }, {
+    remain: {}, deleted: {}, added: {}, changed: [],
+  });
 }
 
 /**
@@ -46,7 +40,8 @@ function compareObject(obj1, obj2) {
  * @returns { string }
  */
 function diffToString(diffObject) {
-  const extractDiffValues = (diffValues) => Object.entries(diffValues).map(([key, value]) => `${key}: ${value}`);
+  const extractDiffValues = (diffValues) => Object.entries(diffValues)
+    .map(([key, value]) => `${key}: ${value}`);
 
   const remain = extractDiffValues(diffObject.remain)
     .map((item) => `  ${item}`);
