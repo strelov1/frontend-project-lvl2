@@ -8,7 +8,8 @@
   },
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx -n --experimental-vm-modules -n --no-warnings jest --colors",
+    "test:watch": "npx -n --experimental-vm-modules -n --no-warnings jest --colors --watch "
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,10 @@
     "url": "https://github.com/strelov1/frontend-project-lvl2/issues"
   },
   "homepage": "https://github.com/strelov1/frontend-project-lvl2#readme",
+  "jest": {
+    "testEnvironment": "node",
+    "verbose": true
+  },
   "dependencies": {
     "commander": "^6.2.0",
     "lodash": "^4.17.20"
@@ -27,6 +32,7 @@
   "devDependencies": {
     "eslint": "^7.14.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1"
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^26.6.3"
   }
 }

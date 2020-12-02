@@ -9,7 +9,7 @@ program
   .arguments('<filepath1> <filepath2>')
   .description(' Compares two configuration files and shows a difference.')
   .action((filepath1, filepath2) => {
-    genDiff(filepath1, filepath2);
+    console.log(genDiff(filepath1, filepath2));
   });
 
 program.parse(process.argv);

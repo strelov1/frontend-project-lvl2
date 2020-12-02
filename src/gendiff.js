@@ -2,9 +2,16 @@ import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
 
+/**
+ * Функция сравнивает два обекта и возвращат результат в виде объекта
+ *
+ * @param {*} obj1
+ * @param {*} obj2
+ * @returns { remain: {}, deleted: {}, added: {}, changed: [] }
+ */
 function compareObject(obj1, obj2) {
   const mergedObject = { ...obj1, ...obj2 };
-  const initAcc = {
+  const initDiffObj = {
     remain: {},
     deleted: {},
     added: {},
@@ -30,35 +37,38 @@ function compareObject(obj1, obj2) {
       return { ...acc, changed: { ...acc.changed, ...changedItem } };
     }
     return acc;
-  }, initAcc);
+  }, initDiffObj);
 }
 
-function extractDiffValues(diffValues) {
-  return Object.entries(diffValues).map(([key, value]) => `${key}: ${value}`);
-}
+/**
+ * Функция превращает объект сравнения в строку
+ * @param { remain: {}, deleted: {}, added: {}, changed: [] } diffObject
+ * @returns { string }
+ */
+function diffToString(diffObject) {
+  const extractDiffValues = (diffValues) => Object.entries(diffValues).map(([key, value]) => `${key}: ${value}`);
 
-function showDiff(diff) {
-  const remain = extractDiffValues(diff.remain)
+  const remain = extractDiffValues(diffObject.remain)
     .map((item) => `  ${item}`);
 
-  const added = extractDiffValues(diff.added)
+  const added = extractDiffValues(diffObject.added)
     .map((item) => `+ ${item}`);
 
-  const deleted = extractDiffValues(diff.deleted)
+  const deleted = extractDiffValues(diffObject.deleted)
     .map((item) => `- ${item}`);
 
-  const changed = Object.entries(diff.changed)
+  const changed = Object.entries(diffObject.changed)
     .map(([key, [val1, val2]]) => [
       `- ${key}: ${val1}`,
       `+ ${key}: ${val2}`,
     ]).flat();
 
   const contain = [...remain, ...added, ...deleted, ...changed]
-    .map((item) => `\t${item}`);
+    .map((item) => `  ${item}`);
 
   const result = ['{', ...contain, '}'];
 
-  console.log(result.join('\n'));
+  return result.join('\n');
 }
 
 export default function genDiff(filepath1, filepath2) {
@@ -68,5 +78,5 @@ export default function genDiff(filepath1, filepath2) {
   const obj2 = JSON.parse(file2);
 
   const diff = compareObject(obj1, obj2);
-  showDiff(diff);
+  return diffToString(diff);
 }
