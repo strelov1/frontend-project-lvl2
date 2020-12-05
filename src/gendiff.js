@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
-import yaml from 'js-yaml';
+import parse from './parsers.js';
 
 /**
  * Функция сравнивает два обекта и возвращат результат в виде объекта
@@ -67,22 +67,12 @@ function diffToString(diffObject) {
   return result.join('\n');
 }
 
-const parseObject = (file, format) => {
-  if (format === '.json') {
-    return JSON.parse(file);
-  }
-  if (['.yaml', '.yml'].includes(format)) {
-    return yaml.safeLoad(file);
-  }
-  throw Error('Неизвестный формат файла, используете: .json, .yml, .yaml');
-};
-
 export default function genDiff(filepath1, filepath2) {
   const file1 = fs.readFileSync(path.resolve(filepath1), 'utf8');
   const file2 = fs.readFileSync(path.resolve(filepath2), 'utf8');
 
-  const obj1 = parseObject(file1, path.extname(filepath1));
-  const obj2 = parseObject(file2, path.extname(filepath2));
+  const obj1 = parse(file1, path.extname(filepath1));
+  const obj2 = parse(file2, path.extname(filepath2));
 
   const diff = compareObject(obj1, obj2);
   return diffToString(diff);
