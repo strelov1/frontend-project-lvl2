@@ -78,17 +78,3 @@ test('compare file2.yml file3.yml ', () => {
 
   expect(diff).toEqual(expected);
 });
-
-test('compare file3.yml file3.yml ', () => {
-
-  const expected = `{
-    locathion: hexlet.io
-    schema: https
-    protocol: http
-    follow: false
-}`;
-    const diff = genDiff(getFixitureFile('file3.yml'), getFixitureFile('file3.yml'));
-  
-    expect(diff).toEqual(expected);
-});
-

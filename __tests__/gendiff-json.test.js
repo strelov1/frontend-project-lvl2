@@ -92,3 +92,21 @@ test('compare file3.json file3.json ', () => {
     expect(diff).toEqual(expected);
 });
 
+
+test('compare file1.json file4.json ', () => {
+
+  const expected = `{
+    host: hexlet.io
+    timeout: 50
+    proxy: 123.234.53.22
+    follow: false
+  + server: {
+      host: hexlet.io
+      timeout: 50
+      proxy: 123.234.53.22
+    }
+}`;
+    const diff = genDiff(getFixitureFile('file1.json'), getFixitureFile('file4.json'));
+  
+    expect(diff).toEqual(expected);
+});

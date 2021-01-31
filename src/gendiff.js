@@ -13,6 +13,7 @@ import parse from './parsers.js';
 function compareObject(obj1, obj2) {
   return Object.entries({ ...obj1, ...obj2 }).reduce((acc, curr) => {
     const [key, value] = curr;
+
     if (!_.has(obj2, key)) {
       const deletedItem = { [key]: value };
       return { ...acc, deleted: { ...acc.deleted, ...deletedItem } };
@@ -35,6 +36,11 @@ function compareObject(obj1, obj2) {
   });
 }
 
+const objToString = (obj) => {
+  const result = Object.entries(obj).map(([key, value]) => `      ${key}: ${value}`);
+  return ['{', ...result, '    }'].join('\n');
+};
+
 /**
  * Функция превращает объект сравнения в строку
  * @param { remain: {}, deleted: {}, added: {}, changed: [] } diffObject
@@ -42,6 +48,12 @@ function compareObject(obj1, obj2) {
  */
 function diffToString(diffObject) {
   const extractDiffValues = (diffValues) => Object.entries(diffValues)
+    .map(([key, value]) => {
+      if (typeof value === 'object') {
+        return [key, objToString(value)];
+      }
+      return [key, value];
+    })
     .map(([key, value]) => `${key}: ${value}`);
 
   const remain = extractDiffValues(diffObject.remain)
