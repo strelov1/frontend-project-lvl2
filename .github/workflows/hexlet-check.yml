@@ -22,4 +22,4 @@ jobs:
       - name: Hexlet project check
         uses: hexlet/project-action@release
         with:
-          hexlet-id: 11381
+          hexlet-id: 11949
