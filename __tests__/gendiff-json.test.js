@@ -110,3 +110,45 @@ test('compare file1.json file4.json ', () => {
   
     expect(diff).toEqual(expected);
 });
+
+test('compare file4.json file5.json ', () => {
+
+  const expected = `{
+    host: hexlet.io
+    timeout: 50
+    proxy: 123.234.53.22
+    follow: false
+  + server2: {
+      host: hexlet.io
+      timeout: 50
+      proxy: 123.234.53.22
+    }
+  - server: {
+      host: hexlet.io
+      timeout: 50
+      proxy: 123.234.53.22
+    }
+}`;
+    const diff = genDiff(getFixitureFile('file4.json'), getFixitureFile('file5.json'));
+  
+    expect(diff).toEqual(expected);
+});
+
+test('compare file5.json file6.json ', () => {
+
+  const expected = `{
+    host: hexlet.io
+    timeout: 50
+    proxy: 123.234.53.22
+    follow: false
+    server2: {
+      timeout: 50
+      proxy: 123.234.53.22
+    - host: hexlet.io
+    + host: hexlet.com
+  }
+}`;
+    const diff = genDiff(getFixitureFile('file5.json'), getFixitureFile('file6.json'));
+  
+    expect(diff).toEqual(expected);
+});
