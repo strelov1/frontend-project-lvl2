@@ -28,8 +28,8 @@ function compareObject(obj1, obj2) {
         return { ...acc, remain: { ...acc.remain, ...remainItem } };
       }
       if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
-          const changedItem = { [key]: [compareObject(obj1[key], obj2[key])] };
-          return { ...acc, changed: { ...acc.changed, ...changedItem } };
+        const changedItem = { [key]: [compareObject(obj1[key], obj2[key])] };
+        return { ...acc, changed: { ...acc.changed, ...changedItem } };
       }
       const changedItem = { [key]: [obj1[key], obj2[key]] };
       return { ...acc, changed: { ...acc.changed, ...changedItem } };
@@ -73,12 +73,12 @@ function diffToString(diffObject) {
     .map(([key, [val1, val2]]) => {
       if (typeof val1 === 'object' || typeof val2 === 'object') {
         return `${key}: ${diffToString(val1)}`.split('\n')
-          .map((item) => `  ${item}`).join('\n')
+          .map((item) => `  ${item}`).join('\n');
       }
       return [
         `- ${key}: ${val1}`,
         `+ ${key}: ${val2}`,
-      ]
+      ];
     }).flat();
 
   const contain = [...remain, ...added, ...deleted, ...changed]
