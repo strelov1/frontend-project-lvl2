@@ -28,7 +28,7 @@ function compareObject(obj1, obj2) {
         const remainItem = { [key]: value };
         return { ...acc, remain: { ...acc.remain, ...remainItem } };
       }
-      if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
+      if (_.isObject(obj1[key]) || _.isObject(obj2[key])) {
         const changedItem = { [key]: [compareObject(obj1[key], obj2[key])] };
         return { ...acc, changed: { ...acc.changed, ...changedItem } };
       }

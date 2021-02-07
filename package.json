@@ -1,7 +1,7 @@
 {
   "name": "@hexlet/code",
   "version": "0.0.1",
-  "description": "[![Actions Status](https://github.com/strelov1/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/strelov1/frontend-project-lvl2/actions)",
+  "description": "Проект: Вычислитель отличий",
   "main": "index.js",
   "bin": {
     "gendiff": "bin/gendiff.js"

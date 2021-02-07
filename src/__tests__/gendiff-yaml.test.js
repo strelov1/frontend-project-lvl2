@@ -1,9 +1,9 @@
 /* eslint-disable */
 
 import path from 'path';
-import genDiff from '../src/gendiff.js';
+import genDiff from '../gendiff.js';
 
-const getFixitureFile = (fileName) => path.join('__tests__/__fixtures__/', fileName);
+const getFixitureFile = (fileName) => path.join('./src/__tests__/__fixtures__/', fileName);
 
 test('compare file1.yml file2.yml', () => {
 
