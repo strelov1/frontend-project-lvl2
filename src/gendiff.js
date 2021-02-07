@@ -41,7 +41,7 @@ function compareObject(obj1, obj2) {
   });
 }
 
-export default function genDiff(filepath1, filepath2) {
+export default function genDiff(filepath1, filepath2, format = 'stylish') {
   const file1 = fs.readFileSync(path.resolve(filepath1), 'utf8');
   const file2 = fs.readFileSync(path.resolve(filepath2), 'utf8');
 
@@ -49,5 +49,16 @@ export default function genDiff(filepath1, filepath2) {
   const obj2 = parse(file2, path.extname(filepath2));
 
   const diff = compareObject(obj1, obj2);
-  return stylish(diff);
+
+  const formates = {
+    stylish,
+  };
+
+  const formater = formates[format] ?? false;
+
+  if (!formater) {
+    throw new Error(`Не известный форматер ${format}`);
+  }
+
+  return formater(diff);
 }
