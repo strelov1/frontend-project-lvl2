@@ -1,0 +1,9 @@
+{
+  + follow: false
+  - host: hexlet.io
+  + locathion: hexlet.io
+  + protocol: http
+  + schema: https
+  - timeout: 20
+  - verbose: true
+}

@@ -26,11 +26,11 @@ function compareObject(obj1, obj2) {
       return [...acc, { key, type: 'added', value }];
     }
     if (existObj1 && !existObj2) {
-      return [...acc, { key, type: 'deleted', value}];
+      return [...acc, { key, type: 'deleted', value }];
     }
     if (existObj1 && existObj2) {
       if (_.isEqual(obj1[key], obj2[key])) {
-        return [...acc, { key,  type: 'remain', value }];
+        return [...acc, { key, type: 'remain', value }];
       }
       return [...acc, { key, type: 'changed', value }];
     }
