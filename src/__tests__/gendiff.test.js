@@ -22,12 +22,12 @@ test('compare file1 file2', () => {
 test('compare file1 file1 ', () => {
   const expected = getFileContent(getFixitureFile('diff2.txt'));
 
-  const diffJson = genDiff(getFixitureFile('file1.json'), getFixitureFile('file2.json'));
+  const diffJson = genDiff(getFixitureFile('file1.json'), getFixitureFile('file1.json'));
 
   expect(diffJson).toEqual(expected);
 
   
-  const diffYaml = genDiff(getFixitureFile('file1.yaml'), getFixitureFile('file2.yaml'));
+  const diffYaml = genDiff(getFixitureFile('file1.yaml'), getFixitureFile('file1.yaml'));
   expect(diffYaml).toEqual(expected);
 });
 

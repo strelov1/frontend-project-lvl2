@@ -10,19 +10,22 @@ const stringifyObj = (obj) => {
  * @returns { string }
  */
 export default function stylish(diffObject) {
+  
+  const stringify = (value) => _.isObject(value) ? stringifyObj(value) : value;
+
   const result = diffObject.map((item) => {
     switch (item.type) {
       case 'added':
-        return `  + ${item.key}: ${_.isObject(item.value.after) ? stringifyObj(item.value.after) : item.value.after}`;
+        return `  + ${item.key}: ${stringify(item.value.after)}`;
       case 'deleted':
-        return `  - ${item.key}: ${_.isObject(item.value.before) ? stringifyObj(item.value.before) : item.value.before}`;
+        return `  - ${item.key}: ${stringify(item.value.before)}`;
       case 'remain':
-        return `    ${item.key}: ${item.value.before}`;
+        return `    ${item.key}: ${stringify(item.value.before)}`;
       case 'changed':
-        if (_.isObject(item.value.after)) {
+        if (_.isObject(item.value.before) || _.isObject(item.value.after)) {
           return `    ${item.key}: ${stylish(item.value.after).split('\n').join('\n    ')}`;
         }
-        return `  - ${item.key}: ${item.value.before}\n  - ${item.key}: ${item.value.after}`;
+        return `  - ${item.key}: ${stringify(item.value.before)}\n  + ${item.key}: ${stringify(item.value.after)}`;
       default:
         throw new Error(`Not existed type ${item.type}`);
     }
