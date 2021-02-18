@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import genDiff from '../src/gendiff.js';
 
-const getFixitureFile = (fileName) => path.join('./__tests__/__fixtures__/', fileName);
+const getFixitureFile = (fileName) => path.join('./__fixtures__/', fileName);
 const getFileContent = (filePath) => fs.readFileSync(filePath, 'utf8');
 
 const runCases = (path1, path2, diffPath) => {
