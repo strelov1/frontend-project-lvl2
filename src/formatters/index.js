@@ -5,6 +5,7 @@ export default (formatName) => {
   const formatters = {
     stylish,
     plain,
+    json: (obj) => JSON.stringify(obj, null, 4)
   };
 
   const formater = formatters[formatName] ?? false;
