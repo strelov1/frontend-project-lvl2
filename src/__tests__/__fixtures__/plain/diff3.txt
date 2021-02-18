@@ -1,0 +1,6 @@
+Property 'host' was removed
+Property 'locathion' was added with value: 'hexlet.io'
+Property 'protocol' was added with value: 'http'
+Property 'proxy' was removed
+Property 'schema' was added with value: 'https'
+Property 'timeout' was removed
