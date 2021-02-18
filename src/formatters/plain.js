@@ -7,7 +7,7 @@ import _ from 'lodash';
  */
 export default function plain(diffObject, partKey = '') {
   const string = Object.entries(diffObject)
-    .filter(([type]) => type != 'remain')
+    .filter(([type]) => type !== 'remain')
     .map(([type, value]) => Object.entries(value).map(([key, diff]) => {
       if (_.isArray(diff)) {
         const [first, second] = diff;

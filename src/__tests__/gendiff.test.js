@@ -73,44 +73,31 @@ test('compare file1 file4', () => {
   expect(diffYaml).toEqual(expected);
 });
 
-// test('compare file4.json file5.json ', () => {
+test('compare file4 file5', () => {
+  const expected = getFileContent(getFixitureFile('diff6.txt'));
 
-//   const expected = `{
-//     host: hexlet.io
-//     timeout: 50
-//     proxy: 123.234.53.22
-//     follow: false
-//   + server2: {
-//       host: hexlet.io
-//       timeout: 50
-//       proxy: 123.234.53.22
-//     }
-//   - server: {
-//       host: hexlet.io
-//       timeout: 50
-//       proxy: 123.234.53.22
-//     }
-// }`;
-//     const diff = genDiff(getFixitureFile('file4.json'), getFixitureFile('file5.json'));
+  const diffJson = genDiff(getFixitureFile('file4.json'), getFixitureFile('file5.json'));
+
+  expect(diffJson).toEqual(expected);
+
   
-//     expect(diff).toEqual(expected);
-// });
+  const diffYaml = genDiff(getFixitureFile('file4.yaml'), getFixitureFile('file5.yaml'));
 
-// test('compare file5.json file6.json ', () => {
-
-//   const expected = `{
-//     host: hexlet.io
-//     timeout: 50
-//     proxy: 123.234.53.22
-//     follow: false
-//     server2: {
-//       timeout: 50
-//       proxy: 123.234.53.22
-//     - host: hexlet.io
-//     + host: hexlet.com
-//   }
-// }`;
-//     const diff = genDiff(getFixitureFile('file5.json'), getFixitureFile('file6.json'));
+  expect(diffYaml).toEqual(expected);
+    
+  const diff = genDiff(getFixitureFile('file4.json'), getFixitureFile('file5.json'));
   
-//     expect(diff).toEqual(expected);
-// });
+});
+
+test('compare file5 file6 ', () => {
+  const expected = getFileContent(getFixitureFile('diff7.txt'));
+
+  const diffJson = genDiff(getFixitureFile('file5.json'), getFixitureFile('file6.json'));
+
+  expect(diffJson).toEqual(expected);
+
+  
+  const diffYaml = genDiff(getFixitureFile('file5.yaml'), getFixitureFile('file6.yaml'));
+
+  expect(diffYaml).toEqual(expected);
+});

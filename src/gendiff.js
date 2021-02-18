@@ -32,8 +32,21 @@ function compareObject(obj1, obj2) {
       if (_.isEqual(obj1[key], obj2[key])) {
         return [...acc, { key, type: 'remain', value }];
       }
+      if (_.isObject(value.before) || _.isObject(value.after)) {
+        return [...acc,
+          {
+            key,
+            type: 'changed',
+            value: {
+              before: value.before,
+              after: compareObject(value.before, value.after),
+            },
+          },
+        ];
+      }
       return [...acc, { key, type: 'changed', value }];
     }
+    return acc;
   }, []);
 }
 
