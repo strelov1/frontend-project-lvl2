@@ -1,31 +1,36 @@
 import _ from 'lodash';
 
+const stringify = (value) => {
+  if (_.isObject(value)) {
+    return '[complex value]';
+  }
+  if (_.isString(value)) {
+    return `'${value}'`;
+  }
+
+  return value;
+};
+
 /**
  * Функция превращает объект сравнения в строку
- * @param { remain: {}, deleted: {}, added: {}, changed: [] } diffObject
  * @returns { string }
  */
-export default function plain(diffObject, partKey = '') {
-  const string = Object.entries(diffObject)
-    .filter(([type]) => type !== 'remain')
-    .map(([type, value]) => Object.entries(value).map(([key, diff]) => {
-      if (_.isArray(diff)) {
-        const [first, second] = diff;
-        if (_.isObject(first)) {
-          return diff.map((item) => {
-            if (_.isObject(item)) {
-              return plain(item, key);
-            }
-            return `Property '${partKey}.${key}' was updated. From '${first}' to '${second}'`;
-          });
+export default function plain(diffObject) {
+  const result = diffObject.filter((item) => item.type !== 'remain').map((item) => {
+    switch (item.type) {
+      case 'added':
+        return `Property '${item.key}' was added with value: ${stringify(item.value.after)}`;
+      case 'deleted':
+        return `Property '${item.key}' was removed`;
+      case 'changed':
+        if (_.isObject(item.value.before) || _.isObject(item.value.after)) {
+          return `Property '${item.key}' was updated. From ${stringify(item.value.before)} to ${stringify(item.value.after)}`;
         }
-        return `Property '${partKey}.${key}' was updated. From '${first}' to '${second}'`;
-      }
+        return `Property '${item.key}' was updated. From ${stringify(item.value.before)} to ${stringify(item.value.after)}`;
+      default:
+        throw new Error(`Not existed type ${item.type}`);
+    }
+  });
 
-      const val = _.isObject(diff) ? '[complex value]' : diff;
-
-      return `Property1 '${key}' was ${type} with value: ${val}`;
-    })).flat(10);
-
-  return string.join('\n');
+  return result.join('\n');
 }

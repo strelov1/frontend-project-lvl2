@@ -10,8 +10,7 @@ const stringifyObj = (obj) => {
  * @returns { string }
  */
 export default function stylish(diffObject) {
-  
-  const stringify = (value) => _.isObject(value) ? stringifyObj(value) : value;
+  const stringify = (value) => (_.isObject(value) ? stringifyObj(value) : value);
 
   const result = diffObject.map((item) => {
     switch (item.type) {
