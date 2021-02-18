@@ -7,8 +7,8 @@
 ## Examples
 
 ### gendiff file1.json file2.json
-[![asciicast](https://asciinema.org/a/kJ1HcM1d0OjXXbUCTSUy2dN9M.png)](https://asciinema.org/a/kJ1HcM1d0OjXXbUCTSUy2dN9M)
+[![asciicast](https://asciinema.org/a/tF2LYJKfgAdTl5R2xoyBGRTkB.png)](https://asciinema.org/a/tF2LYJKfgAdTl5R2xoyBGRTkB)
 
 
 ### gendiff file1.yml file2.yml
-[![asciicast](https://asciinema.org/a/fsEmrfrlru8gdf5eVK7wtImUa.png)](https://asciinema.org/a/LFXwpQ1UtrNusaVn2Z5SBwfYC)
+[![asciicast](https://asciinema.org/a/RCUG3i9qSzP5L3lcBPzG3MF1a.png)](https://asciinema.org/a/RCUG3i9qSzP5L3lcBPzG3MF1a)
