@@ -52,3 +52,7 @@ test('compare file4 file5', () => {
 test('compare file5 file6 ', () => {
   runCases('file5', 'file6', 'diff7');
 });
+
+test('compare file7 file8 ', () => {
+  runCases('file7', 'file8', 'diff8');
+});

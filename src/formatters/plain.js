@@ -23,8 +23,8 @@ export default function plain(diffObject, parentKey = '') {
       case 'deleted':
         return `Property '${parentKey}${item.key}' was removed`;
       case 'changed':
-        if (_.isObject(item.value.before) || _.isObject(item.value.after)) {
-          return plain(item.value.after, `${item.key}.`);
+        if (_.isObject(item.value.before) && _.isObject(item.value.after)) {
+          return plain(item.value.after, `${parentKey}${item.key}.`);
         }
         return `Property '${parentKey}${item.key}' was updated. From ${stringify(item.value.before)} to ${stringify(item.value.after)}`;
       default:
