@@ -13,7 +13,7 @@ import getFormater from './formatters/index.js';
 function compareObject(obj1, obj2) {
   const keys = Object.keys({ ...obj1, ...obj2 });
 
-  return keys.sort().reduce((acc, key) => {
+  return _.sortBy(keys).reduce((acc, key) => {
     const existObj1 = _.has(obj1, key);
     const existObj2 = _.has(obj2, key);
 
