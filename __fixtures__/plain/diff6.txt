@@ -1,2 +1,0 @@
-Property 'server' was removed
-Property 'server2' was added with value: [complex value]

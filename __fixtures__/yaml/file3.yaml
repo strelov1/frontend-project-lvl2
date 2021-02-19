@@ -1,5 +1,8 @@
 ---
-locathion: hexlet.io
-schema: https
-protocol: http
+host: hexlet.io
+timeout: 50
+proxy: 123.234.53.22
 follow: false
+server2:
+  host: hexlet.com
+  proxy: 123.234.53.22

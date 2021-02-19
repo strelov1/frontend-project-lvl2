@@ -6,7 +6,7 @@ import parse from './parsers.js';
 import getFormater from './formatters/index.js';
 import {
   ADDED, CHANGED, DELETED, NESTED, REMAIN,
-} from './constants';
+} from './constants.js';
 
 /**
  * Функция сравнивает два обекта и возвращат результат в виде объекта

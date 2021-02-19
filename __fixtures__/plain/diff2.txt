@@ -1,0 +1,1 @@
+Property 'server2.host' was updated. From 'hexlet.io' to 'hexlet.com'

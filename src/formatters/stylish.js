@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import {
   ADDED, CHANGED, DELETED, NESTED, REMAIN,
-} from '../constants';
+} from '../constants.js';
 
 const addBraces = (value, space) => ['{', ...value, `${space}}`];
 
@@ -42,5 +42,5 @@ export default function stylish(diffObject) {
     }
   });
 
-  return ['{', ...result, '}'].join('\n');
+  return addBraces(result, '').join('\n');
 }

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import {
   ADDED, CHANGED, DELETED, NESTED, REMAIN,
-} from '../constants';
+} from '../constants.js';
 
 const stringify = (value) => {
   if (_.isObject(value)) {

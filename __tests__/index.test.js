@@ -29,30 +29,10 @@ test('compare file1 file2', () => {
   runCases('file1', 'file2', 'diff1');
 });
 
-test('compare file1 file1 ', () => {
-  runCases('file1', 'file1', 'diff2');
-});
-
-test('compare file1 file3', () => {
-  runCases('file1', 'file3', 'diff3');
-});
-
 test('compare file2 file3 ', () => {
-  runCases('file2', 'file3', 'diff4');
+  runCases('file2', 'file3', 'diff2');
 });
 
-test('compare file1 file4', () => {
-  runCases('file1', 'file4', 'diff5');
-});
-
-test('compare file4 file5', () => {
-  runCases('file4', 'file5', 'diff6');
-});
-
-test('compare file5 file6 ', () => {
-  runCases('file5', 'file6', 'diff7');
-});
-
-test('compare file7 file8 ', () => {
-  runCases('file7', 'file8', 'diff8');
+test('compare file4 file5 ', () => {
+  runCases('file4', 'file5', 'diff3');
 });

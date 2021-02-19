@@ -1,7 +1,0 @@
-Property 'follow' was added with value: false
-Property 'host' was removed
-Property 'locathion' was added with value: 'hexlet.io'
-Property 'protocol' was added with value: 'http'
-Property 'schema' was added with value: 'https'
-Property 'timeout' was removed
-Property 'verbose' was removed
