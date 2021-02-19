@@ -1,8 +1,11 @@
 import _ from 'lodash';
+import {
+  ADDED, CHANGED, DELETED, NESTED, REMAIN,
+} from '../constants';
 
 const addBraces = (value, space) => ['{', ...value, `${space}}`];
 
-const addSpace = (str, space = '    ') => str.split('\n').join(`\n${space}`);
+const addSpace = (str, space) => str.split('\n').join(`\n${space}`);
 
 const stringifyObj = (obj, space = '    ') => {
   const result = Object.entries(obj).map(([key, value]) => {
@@ -18,22 +21,22 @@ const stringifyObj = (obj, space = '    ') => {
 const stringify = (value) => (_.isObject(value) ? stringifyObj(value) : value);
 
 /**
+ * Функция превращает объект сравнения в строку
  * @returns { string }
  */
 export default function stylish(diffObject) {
   const result = diffObject.map((item) => {
     switch (item.type) {
-      case 'added':
+      case ADDED:
         return `  + ${item.key}: ${stringify(item.value.after)}`;
-      case 'deleted':
+      case DELETED:
         return `  - ${item.key}: ${stringify(item.value.before)}`;
-      case 'remain':
+      case REMAIN:
         return `    ${item.key}: ${stringify(item.value.before)}`;
-      case 'changed':
-        if (_.isObject(item.value.before) && _.isObject(item.value.after)) {
-          return `    ${item.key}: ${addSpace(stylish(item.value.after))}`;
-        }
+      case CHANGED:
         return `  - ${item.key}: ${stringify(item.value.before)}\n  + ${item.key}: ${stringify(item.value.after)}`;
+      case NESTED:
+        return `    ${item.key}: ${addSpace(stylish(item.children), '    ')}`;
       default:
         throw new Error(`Not existed type ${item.type}`);
     }

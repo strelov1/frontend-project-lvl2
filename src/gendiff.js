@@ -1,8 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
+
 import parse from './parsers.js';
 import getFormater from './formatters/index.js';
+import {
+  ADDED, CHANGED, DELETED, NESTED, REMAIN,
+} from './constants';
 
 /**
  * Функция сравнивает два обекта и возвращат результат в виде объекта
@@ -23,28 +27,26 @@ function compareObject(obj1, obj2) {
     };
 
     if (!existObj1 && existObj2) {
-      return [...acc, { key, type: 'added', value }];
+      return [...acc, { key, type: ADDED, value }];
     }
     if (existObj1 && !existObj2) {
-      return [...acc, { key, type: 'deleted', value }];
+      return [...acc, { key, type: DELETED, value }];
     }
     if (existObj1 && existObj2) {
       if (_.isEqual(obj1[key], obj2[key])) {
-        return [...acc, { key, type: 'remain', value }];
+        return [...acc, { key, type: REMAIN, value }];
       }
       if (_.isObject(value.before) && _.isObject(value.after)) {
         return [...acc,
           {
             key,
-            type: 'changed',
-            value: {
-              before: value.before,
-              after: compareObject(value.before, value.after),
-            },
+            type: NESTED,
+            value: null,
+            children: compareObject(value.before, value.after),
           },
         ];
       }
-      return [...acc, { key, type: 'changed', value }];
+      return [...acc, { key, type: CHANGED, value }];
     }
     return acc;
   }, []);

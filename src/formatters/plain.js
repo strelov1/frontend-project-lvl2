@@ -1,4 +1,7 @@
 import _ from 'lodash';
+import {
+  ADDED, CHANGED, DELETED, NESTED, REMAIN,
+} from '../constants';
 
 const stringify = (value) => {
   if (_.isObject(value)) {
@@ -16,17 +19,16 @@ const stringify = (value) => {
  * @returns { string }
  */
 export default function plain(diffObject, parentKey = '') {
-  const result = diffObject.filter((item) => item.type !== 'remain').map((item) => {
+  const result = diffObject.filter((item) => item.type !== REMAIN).map((item) => {
     switch (item.type) {
-      case 'added':
+      case ADDED:
         return `Property '${parentKey}${item.key}' was added with value: ${stringify(item.value.after)}`;
-      case 'deleted':
+      case DELETED:
         return `Property '${parentKey}${item.key}' was removed`;
-      case 'changed':
-        if (_.isObject(item.value.before) && _.isObject(item.value.after)) {
-          return plain(item.value.after, `${parentKey}${item.key}.`);
-        }
+      case CHANGED:
         return `Property '${parentKey}${item.key}' was updated. From ${stringify(item.value.before)} to ${stringify(item.value.after)}`;
+      case NESTED:
+        return plain(item.children, `${parentKey}${item.key}.`);
       default:
         throw new Error(`Not existed type ${item.type}`);
     }
