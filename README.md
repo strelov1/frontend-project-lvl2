@@ -6,9 +6,28 @@
 
 ## Examples
 
-### gendiff file1.json file2.json
-[![asciicast](https://asciinema.org/a/kJ1HcM1d0OjXXbUCTSUy2dN9M.png)](https://asciinema.org/a/kJ1HcM1d0OjXXbUCTSUy2dN9M)
+
+### gendiff -h
+[![asciicast](https://asciinema.org/a/Y45Sbnu6OLVmbDAyttTITpXgS.png)](https://asciinema.org/a/Y45Sbnu6OLVmbDAyttTITpXgS)
+
+### gendiff flat json
+[![asciicast](https://asciinema.org/a/tF2LYJKfgAdTl5R2xoyBGRTkB.png)](https://asciinema.org/a/tF2LYJKfgAdTl5R2xoyBGRTkB)
+
+### gendiff flat yaml
+[![asciicast](https://asciinema.org/a/RCUG3i9qSzP5L3lcBPzG3MF1a.png)](https://asciinema.org/a/RCUG3i9qSzP5L3lcBPzG3MF1a)
+
+### gendiff deep json
+[![asciicast](https://asciinema.org/a/Ek6jMGzLwYgd8tyAcohhiraYs.png)](https://asciinema.org/a/Ek6jMGzLwYgd8tyAcohhiraYs)
+
+### gendiff deep yaml
+[![asciicast](https://asciinema.org/a/jeoHSFcw93qDq1qR3I4hayPj0.png)](https://asciinema.org/a/jeoHSFcw93qDq1qR3I4hayPj0)
+
+### gendiff deep format pain 
+[![asciicast](https://asciinema.org/a/YP4z9uKYE2unnm6MFkSlPJQtZ.png)](https://asciinema.org/a/YP4z9uKYE2unnm6MFkSlPJQtZ)
 
 
-### gendiff file1.yml file2.yml
-[![asciicast](https://asciinema.org/a/fsEmrfrlru8gdf5eVK7wtImUa.png)](https://asciinema.org/a/LFXwpQ1UtrNusaVn2Z5SBwfYC)
+### gendiff format json 
+[![asciicast](https://asciinema.org/a/TaT4IRuVrIA598ihsOhpHmlOB.png)](https://asciinema.org/a/TaT4IRuVrIA598ihsOhpHmlOB)
+
+
+
