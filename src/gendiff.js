@@ -17,7 +17,7 @@ import {
 function compareObject(obj1, obj2) {
   const keys = Object.keys({ ...obj1, ...obj2 });
 
-  return _.sortBy(keys).reduce((acc, key) => {
+  return _.sortBy(keys).map((key) => {
     const existObj1 = _.has(obj1, key);
     const existObj2 = _.has(obj2, key);
 
@@ -27,29 +27,27 @@ function compareObject(obj1, obj2) {
     };
 
     if (!existObj1 && existObj2) {
-      return [...acc, { key, type: ADDED, value }];
+      return { key, type: ADDED, value };
     }
     if (existObj1 && !existObj2) {
-      return [...acc, { key, type: DELETED, value }];
+      return { key, type: DELETED, value };
     }
     if (existObj1 && existObj2) {
       if (_.isEqual(obj1[key], obj2[key])) {
-        return [...acc, { key, type: REMAIN, value }];
+        return { key, type: REMAIN, value };
       }
       if (_.isObject(value.before) && _.isObject(value.after)) {
-        return [...acc,
-          {
-            key,
-            type: NESTED,
-            value: null,
-            children: compareObject(value.before, value.after),
-          },
-        ];
+        return {
+          key,
+          type: NESTED,
+          value: null,
+          children: compareObject(value.before, value.after),
+        };
       }
-      return [...acc, { key, type: CHANGED, value }];
+      return { key, type: CHANGED, value };
     }
-    return acc;
-  }, []);
+    return key;
+  });
 }
 
 export default function genDiff(filepath1, filepath2, formatName = 'stylish') {
