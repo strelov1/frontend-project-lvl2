@@ -1,4 +1,11 @@
 import yaml from 'js-yaml';
+import _ from 'lodash';
+
+const parsers = {
+  json: JSON.parse,
+  yml: yaml.safeLoad,
+  yaml: yaml.safeLoad,
+}
 
 /**
  * Парсинг строки в обект по заданному формату
@@ -6,11 +13,9 @@ import yaml from 'js-yaml';
  * @param {string} format
  */
 export default (content, format) => {
-  if (format === '.json') {
-    return JSON.parse(content);
+  if (!_.has(parsers, format)) {
+    throw Error(`Неизвестный формат файла: ${format} | Используете: .json, .yml, .yaml`);
   }
-  if (['.yaml', '.yml'].includes(format)) {
-    return yaml.safeLoad(content);
-  }
-  throw Error('Неизвестный формат файла, используете: .json, .yml, .yaml');
+  const parser = parsers[format];
+  return parser(content);
 };

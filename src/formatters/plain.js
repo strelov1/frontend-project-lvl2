@@ -18,17 +18,17 @@ const stringify = (value) => {
  * Функция превращает объект сравнения в строку
  * @returns { string }
  */
-export default function plain(diffObject, parentKey = '') {
+export default function plain(diffObject, parentKeys = '') {
   const result = diffObject.filter((item) => item.type !== REMAIN).map((item) => {
     switch (item.type) {
       case ADDED:
-        return `Property '${parentKey}${item.key}' was added with value: ${stringify(item.value.after)}`;
+        return `Property '${parentKeys}${item.key}' was added with value: ${stringify(item.value.after)}`;
       case DELETED:
-        return `Property '${parentKey}${item.key}' was removed`;
+        return `Property '${parentKeys}${item.key}' was removed`;
       case CHANGED:
-        return `Property '${parentKey}${item.key}' was updated. From ${stringify(item.value.before)} to ${stringify(item.value.after)}`;
+        return `Property '${parentKeys}${item.key}' was updated. From ${stringify(item.value.before)} to ${stringify(item.value.after)}`;
       case NESTED:
-        return plain(item.children, `${parentKey}${item.key}.`);
+        return plain(item.children, `${parentKeys}${item.key}.`);
       default:
         throw new Error(`Not existed type ${item.type}`);
     }

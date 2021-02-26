@@ -1,38 +1,29 @@
-/* eslint-disable */
-
+import { test, expect, describe } from '@jest/globals';
 import fs from 'fs';
 import path from 'path';
-import genDiff from '../src/gendiff.js';
+import genDiff from '../src/index.js';
 
-const getFixitureFile = (fileName) => path.join('./__fixtures__/', fileName);
-const getFileContent = (filePath) => fs.readFileSync(filePath, 'utf8');
+const getFixturePath = (filename) => path.join('__fixtures__', filename);
+const readFixture = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8').trim();
 
-const runCases = (path1, path2, diffPath) => {
-  const expectedStylish = getFileContent(getFixitureFile(`stylish/${diffPath}.txt`));
-  const expectedPlain = getFileContent(getFixitureFile(`plain/${diffPath}.txt`));
+const formats = [
+  'yaml',
+  'json',
+];
 
-  const diffJsonStylish = genDiff(getFixitureFile(`json/${path1}.json`), getFixitureFile(`json/${path2}.json`), 'stylish');
-  expect(diffJsonStylish).toEqual(expectedStylish);
+const stylishResult = readFixture('result_stylish.txt');
+const plainResult = readFixture('result_plain.txt');
 
-  const diffJsonPlain = genDiff(getFixitureFile(`json/${path1}.json`), getFixitureFile(`json/${path2}.json`), 'plain');
-  expect(diffJsonPlain).toEqual(expectedPlain);
+describe('gendiff', () => {
+  test.each(formats)('gendiff --format %s', (format) => {
+    const filepath1 = getFixturePath(`file1.${format}`);
+    const filepath2 = getFixturePath(`file2.${format}`);
 
-  const diffYamlStylish = genDiff(getFixitureFile(`yaml/${path1}.yaml`), getFixitureFile(`yaml/${path2}.yaml`), 'stylish');
-  expect(diffYamlStylish).toEqual(expectedStylish);
+    expect(genDiff(filepath1, filepath2)).toEqual(stylishResult);
+    expect(genDiff(filepath1, filepath2, 'stylish')).toEqual(stylishResult);
+    expect(genDiff(filepath1, filepath2, 'plain')).toEqual(plainResult);
 
-  const diffYamlPlain = genDiff(getFixitureFile(`yaml/${path1}.yaml`), getFixitureFile(`yaml/${path2}.yaml`), 'plain');
-  expect(diffYamlPlain).toEqual(expectedPlain);
-}
-
-
-test('compare file1 file2', () => {
-  runCases('file1', 'file2', 'diff1');
-});
-
-test('compare file2 file3 ', () => {
-  runCases('file2', 'file3', 'diff2');
-});
-
-test('compare file4 file5 ', () => {
-  runCases('file4', 'file5', 'diff3');
+    const jsonData = genDiff(filepath1, filepath2, 'json');
+    expect(() => JSON.parse(jsonData)).not.toThrow();
+  });
 });

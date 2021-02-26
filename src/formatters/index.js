@@ -1,18 +1,19 @@
+import _ from 'lodash';
+
 import stylish from './stylish.js';
 import plain from './plain.js';
 
-export default (formatName) => {
-  const formatters = {
-    stylish,
-    plain,
-    json: (obj) => JSON.stringify(obj, null, 4),
-  };
+const formatters = {
+  stylish,
+  plain,
+  json: (obj) => JSON.stringify(obj, null, 4),
+};
 
-  const formater = formatters[formatName] ?? false;
-
-  if (!formater) {
-    throw new Error(`Не известный формат представления ${formatName}`);
+export default (content, format) => {
+  if (!_.has(formatters, format)) {
+    throw new Error(`Не известный формат представления ${format}`);
   }
-
-  return formater;
+  
+  const formater = formatters[format];
+  return formater(content);
 };
