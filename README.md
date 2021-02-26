@@ -22,18 +22,21 @@ $ gendiff --format=[format] [path1] [path2]
 ## Examples
 
 ### gendiff -h
-[![asciicast](https://asciinema.org/a/Y45Sbnu6OLVmbDAyttTITpXgS.svg)](https://asciinema.org/a/Y45Sbnu6OLVmbDAyttTITpXgS)
-### gendiff json --format stlish
-[![asciicast](https://asciinema.org/a/Ek6jMGzLwYgd8tyAcohhiraYs.svg)](https://asciinema.org/a/Ek6jMGzLwYgd8tyAcohhiraYs)
+[![asciicast](https://asciinema.org/a/Qt2uAiW8A9UptK376tLVGrgLN.svg)](https://asciinema.org/a/Qt2uAiW8A9UptK376tLVGrgLN)
+### gendiff json --format stylish
+[![asciicast](https://asciinema.org/a/RaDmodOPzQLQluB2b6Lihk8gK.svg)](https://asciinema.org/a/RaDmodOPzQLQluB2b6Lihk8gK)
 
-### gendiff yaml --format stlish
-[![asciicast](https://asciinema.org/a/jeoHSFcw93qDq1qR3I4hayPj0.svg)](https://asciinema.org/a/jeoHSFcw93qDq1qR3I4hayPj0)
+### gendiff yaml --format stylish
+[![asciicast](https://asciinema.org/a/sdkOlT2Wt9VuuWN9Y94QnwTCs.svg)](https://asciinema.org/a/sdkOlT2Wt9VuuWN9Y94QnwTCs)
 
-### gendiff yaml --format pain 
-[![asciicast](https://asciinema.org/a/YP4z9uKYE2unnm6MFkSlPJQtZ.svg)](https://asciinema.org/a/YP4z9uKYE2unnm6MFkSlPJQtZ)
+### gendiff json --format plain 
+[![asciicast](https://asciinema.org/a/adxBxCzY8jVQxH0uKftv7rp0N.svg)](https://asciinema.org/a/adxBxCzY8jVQxH0uKftv7rp0N)
 
-### gendiff --format pain 
-[![asciicast](https://asciinema.org/a/TaT4IRuVrIA598ihsOhpHmlOB.svg)](https://asciinema.org/a/TaT4IRuVrIA598ihsOhpHmlOB)
+### gendiff yaml --format plain 
+[![asciicast](https://asciinema.org/a/8KsFaybFR9iqphsELFsIyCR4d.svg)](https://asciinema.org/a/8KsFaybFR9iqphsELFsIyCR4d)
+
+### gendiff --format json 
+[![asciicast](https://asciinema.org/a/EiPhDhiqJflQFwFMCfFCPnzyg.svg)](https://asciinema.org/a/EiPhDhiqJflQFwFMCfFCPnzyg)
 
 
 
