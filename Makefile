@@ -2,7 +2,7 @@ install:
 	npm install
 
 link:
-	sudo npm link
+	npm link
 
 test:
 	npm run test
