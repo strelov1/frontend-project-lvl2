@@ -24,8 +24,8 @@ const stringify = (value) => (_.isObject(value) ? stringifyObj(value) : value);
  * Функция превращает объект сравнения в строку
  * @returns { string }
  */
-export default function stylish(diffObject) {
-  const result = diffObject.map((item) => {
+export default function stylish(three) {
+  const result = three.map((item) => {
     switch (item.type) {
       case ADDED:
         return `  + ${item.key}: ${stringify(item.value.after)}`;
