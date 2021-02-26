@@ -5,7 +5,7 @@ const parsers = {
   json: JSON.parse,
   yml: yaml.safeLoad,
   yaml: yaml.safeLoad,
-}
+};
 
 /**
  * Парсинг строки в обект по заданному формату

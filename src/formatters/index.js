@@ -13,7 +13,7 @@ export default (content, format) => {
   if (!_.has(formatters, format)) {
     throw new Error(`Не известный формат представления ${format}`);
   }
-  
+
   const formater = formatters[format];
   return formater(content);
 };
