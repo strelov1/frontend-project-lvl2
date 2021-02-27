@@ -20,22 +20,24 @@ const stringify = (value) => {
  */
 export default function plain(three, accKeys = []) {
   const filteredThree = three.filter(({ type }) => type !== UNCHANGED);
-  const result = filteredThree.map((item) => {
-    const keys = [...accKeys, item.key];
-    const propertyName = keys.join('.');
-    switch (item.type) {
+  const lines = filteredThree.map(({
+    type, key, value, children,
+  }) => {
+    const keys = [...accKeys, key];
+    const propName = keys.join('.');
+    switch (type) {
       case ADDED:
-        return `Property '${propertyName}' was added with value: ${stringify(item.value.after)}`;
+        return `Property '${propName}' was added with value: ${stringify(value.after)}`;
       case DELETED:
-        return `Property '${propertyName}' was removed`;
+        return `Property '${propName}' was removed`;
       case CHANGED:
-        return `Property '${propertyName}' was updated. From ${stringify(item.value.before)} to ${stringify(item.value.after)}`;
+        return `Property '${propName}' was updated. From ${stringify(value.before)} to ${stringify(value.after)}`;
       case NESTED:
-        return plain(item.children, keys);
+        return plain(children, keys);
       default:
-        throw new Error(`Not existed type ${item.type}`);
+        throw new Error(`Not existed type: ${type}`);
     }
   });
 
-  return result.join('\n');
+  return lines.join('\n');
 }

@@ -67,7 +67,7 @@ export default function stylish(three) {
         case NESTED:
           return `${prefix(type, key)}: ${iter(children, currentDepth)}`;
         default:
-          throw new Error(`Not existed type ${type}`);
+          throw new Error(`Not existed type: ${type}`);
       }
     });
 
