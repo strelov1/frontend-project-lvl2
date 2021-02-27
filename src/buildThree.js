@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import {
-  ADDED, CHANGED, DELETED, NESTED, REMAIN,
+  ADDED, CHANGED, DELETED, NESTED, UNCHANGED,
 } from './constants.js';
 
 const buildThree = (obj1, obj2) => {
@@ -31,7 +31,7 @@ const buildThree = (obj1, obj2) => {
     }
 
     if (_.isEqual(obj1[key], obj2[key])) {
-      return { key, type: REMAIN, value };
+      return { key, type: UNCHANGED, value };
     }
 
     return { key, type: CHANGED, value };

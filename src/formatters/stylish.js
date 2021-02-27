@@ -1,46 +1,81 @@
 import _ from 'lodash';
 import {
-  ADDED, CHANGED, DELETED, NESTED, REMAIN,
+  ADDED, CHANGED, DELETED, NESTED, UNCHANGED,
 } from '../constants.js';
 
-const addBraces = (value, space) => ['{', ...value, `${space}}`];
+const spacesCount = 4;
+const replacer = ' ';
+const openSymbol = '{';
+const closeSymbol = '}';
 
-const addSpace = (str, space) => str.split('\n').join(`\n${space}`);
+const stringify = (value, depth) => {
+  if (!_.isObject(value)) {
+    return value;
+  }
 
-const stringifyObj = (obj, space = '    ') => {
-  const result = Object.entries(obj).map(([key, value]) => {
-    if (_.isObject(value)) {
-      return `${key}: ${addSpace(stringifyObj(value, `${space}`), space)}`;
-    }
-    return `${key}: ${value}`;
-  });
+  const indentSize = depth * spacesCount;
+  const currentIndent = replacer.repeat(indentSize);
+  const closeIndent = replacer.repeat(indentSize - spacesCount);
 
-  return addBraces(result.map((item) => `${space}${space}${item}`), space).join('\n');
+  const lines = Object
+    .entries(value)
+    .map(([key, val]) => `${currentIndent}${key}: ${stringify(val, depth + 1)}`);
+
+  return [
+    openSymbol,
+    ...lines,
+    `${closeIndent}${closeSymbol}`,
+  ].join('\n');
 };
 
-const stringify = (value) => (_.isObject(value) ? stringifyObj(value) : value);
+const signMap = {
+  [ADDED]: '+',
+  [DELETED]: '-',
+};
 
 /**
  * Функция превращает объект сравнения в строку
  * @returns { string }
  */
 export default function stylish(three) {
-  const result = three.map((item) => {
-    switch (item.type) {
-      case ADDED:
-        return `  + ${item.key}: ${stringify(item.value.after)}`;
-      case DELETED:
-        return `  - ${item.key}: ${stringify(item.value.before)}`;
-      case REMAIN:
-        return `    ${item.key}: ${stringify(item.value.before)}`;
-      case CHANGED:
-        return `  - ${item.key}: ${stringify(item.value.before)}\n  + ${item.key}: ${stringify(item.value.after)}`;
-      case NESTED:
-        return `    ${item.key}: ${addSpace(stylish(item.children), '    ')}`;
-      default:
-        throw new Error(`Not existed type ${item.type}`);
-    }
-  });
+  const iter = (currentValue, depth) => {
+    const indentSize = depth * spacesCount;
+    const currentIndent = replacer.repeat(indentSize - 2);
+    const closeIndent = replacer.repeat(indentSize - spacesCount);
 
-  return addBraces(result, '').join('\n');
+    const prefix = (type, key) => {
+      const sign = signMap[type] || replacer;
+      return `${currentIndent}${sign}${replacer}${key}`;
+    };
+
+    const lines = currentValue.flatMap(({
+      key, type, value, children,
+    }) => {
+      switch (type) {
+        case ADDED:
+          return `${prefix(type, key)}: ${stringify(value.after, depth + 1)}`;
+        case DELETED:
+          return `${prefix(type, key)}: ${stringify(value.before, depth + 1)}`;
+        case UNCHANGED:
+          return `${prefix(type, key)}: ${stringify(value.before, depth + 1)}`;
+        case CHANGED:
+          return [
+            `${prefix(DELETED, key)}: ${stringify(value.before, depth + 1)}`,
+            `${prefix(ADDED, key)}: ${stringify(value.after, depth + 1)}`,
+          ];
+        case NESTED:
+          return `${prefix(type, key)}: ${iter(children, depth + 1)}`;
+        default:
+          throw new Error(`Not existed type ${type}`);
+      }
+    });
+
+    return [
+      openSymbol,
+      ...lines,
+      `${closeIndent}${closeSymbol}`,
+    ].join('\n');
+  };
+
+  return iter(three, 1);
 }

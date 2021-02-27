@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import {
-  ADDED, CHANGED, DELETED, NESTED, REMAIN,
+  ADDED, CHANGED, DELETED, NESTED, UNCHANGED,
 } from '../constants.js';
 
 const stringify = (value) => {
@@ -19,7 +19,7 @@ const stringify = (value) => {
  * @returns { string }
  */
 export default function plain(three, accKeys = []) {
-  const filteredThree = three.filter(({ type }) => type !== REMAIN);
+  const filteredThree = three.filter(({ type }) => type !== UNCHANGED);
   const result = filteredThree.map((item) => {
     const keys = [...accKeys, item.key];
     const propertyName = keys.join('.');
