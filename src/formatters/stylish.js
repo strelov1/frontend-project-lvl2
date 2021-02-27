@@ -51,20 +51,21 @@ export default function stylish(three) {
     const lines = currentValue.flatMap(({
       key, type, value, children,
     }) => {
+      const currentDepth = depth + 1;
       switch (type) {
         case ADDED:
-          return `${prefix(type, key)}: ${stringify(value.after, depth + 1)}`;
+          return `${prefix(type, key)}: ${stringify(value.after, currentDepth)}`;
         case DELETED:
-          return `${prefix(type, key)}: ${stringify(value.before, depth + 1)}`;
+          return `${prefix(type, key)}: ${stringify(value.before, currentDepth)}`;
         case UNCHANGED:
-          return `${prefix(type, key)}: ${stringify(value.before, depth + 1)}`;
+          return `${prefix(type, key)}: ${stringify(value.before, currentDepth)}`;
         case CHANGED:
           return [
-            `${prefix(DELETED, key)}: ${stringify(value.before, depth + 1)}`,
-            `${prefix(ADDED, key)}: ${stringify(value.after, depth + 1)}`,
+            `${prefix(DELETED, key)}: ${stringify(value.before, currentDepth)}`,
+            `${prefix(ADDED, key)}: ${stringify(value.after, currentDepth)}`,
           ];
         case NESTED:
-          return `${prefix(type, key)}: ${iter(children, depth + 1)}`;
+          return `${prefix(type, key)}: ${iter(children, currentDepth)}`;
         default:
           throw new Error(`Not existed type ${type}`);
       }
