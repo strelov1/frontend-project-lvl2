@@ -4,6 +4,7 @@ import {
 } from '../constants.js';
 
 const spacesCount = 4;
+const prefixSpaceOffset = 2;
 const replacer = ' ';
 const openSymbol = '{';
 const closeSymbol = '}';
@@ -40,7 +41,7 @@ const signMap = {
 export default function stylish(three) {
   const iter = (currentValue, depth) => {
     const indentSize = depth * spacesCount;
-    const currentIndent = replacer.repeat(indentSize - 2);
+    const currentIndent = replacer.repeat(indentSize - prefixSpaceOffset);
     const closeIndent = replacer.repeat(indentSize - spacesCount);
 
     const prefix = (type, key) => {
