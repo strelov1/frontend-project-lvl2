@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 import parse from './parsers.js';
-import buildThree from './buildThree.js';
+import buildTree from './buildTree.js';
 import format from './formatters/index.js';
 
 const getFileFormat = (filepath) => path.extname(filepath).slice(1);
@@ -14,7 +14,7 @@ export default function genDiff(filepath1, filepath2, styleFormat = 'stylish') {
   const obj1 = parse(file1, getFileFormat(filepath1));
   const obj2 = parse(file2, getFileFormat(filepath2));
 
-  const three = buildThree(obj1, obj2);
+  const tree = buildTree(obj1, obj2);
 
-  return format(three, styleFormat);
+  return format(tree, styleFormat);
 }

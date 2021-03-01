@@ -14,7 +14,7 @@ const parsers = {
  */
 export default (content, format) => {
   if (!_.has(parsers, format)) {
-    throw Error(`Неизвестный формат файла: ${format} | Используете: .json, .yml, .yaml`);
+    throw Error(`Unknown type of data: ${format}`);
   }
   const parser = parsers[format];
   return parser(content);

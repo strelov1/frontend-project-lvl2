@@ -4,7 +4,7 @@ import {
   ADDED, CHANGED, DELETED, NESTED, UNCHANGED,
 } from './constants.js';
 
-const buildThree = (obj1, obj2) => {
+const buildTree = (obj1, obj2) => {
   const keys = _.sortBy(_.union(_.keys(obj1), _.keys(obj2)));
 
   return keys.map((key) => {
@@ -26,7 +26,7 @@ const buildThree = (obj1, obj2) => {
         key,
         type: NESTED,
         value: null,
-        children: buildThree(value.before, value.after),
+        children: buildTree(value.before, value.after),
       };
     }
 
@@ -38,4 +38,4 @@ const buildThree = (obj1, obj2) => {
   });
 };
 
-export default buildThree;
+export default buildTree;

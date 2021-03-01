@@ -38,7 +38,7 @@ const signMap = {
  * Функция превращает объект сравнения в строку
  * @returns { string }
  */
-export default function stylish(three) {
+export default function stylish(tree) {
   const iter = (currentValue, depth) => {
     const indentSize = depth * spacesCount;
     const currentIndent = replacer.repeat(indentSize - prefixSpaceOffset);
@@ -79,5 +79,5 @@ export default function stylish(three) {
     ].join('\n');
   };
 
-  return iter(three, 1);
+  return iter(tree, 1);
 }

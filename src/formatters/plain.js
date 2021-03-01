@@ -18,9 +18,9 @@ const stringify = (value) => {
  * Функция превращает объект сравнения в строку
  * @returns { string }
  */
-export default function plain(three, accKeys = []) {
-  const filteredThree = three.filter(({ type }) => type !== UNCHANGED);
-  const lines = filteredThree.map(({
+export default function plain(tree, accKeys = []) {
+  const filteredTree = tree.filter(({ type }) => type !== UNCHANGED);
+  const lines = filteredTree.map(({
     type, key, value, children,
   }) => {
     const keys = [...accKeys, key];
